@@ -42,7 +42,8 @@ public class Main {
 
         // get next examination ID and create directory
         FileFilter fileFilter = new WildcardFileFilter("[0-9]+");
-        File[] files = fdBase.listFiles(fileFilter);
+        //File[] files = fdBase.listFiles(fileFilter);
+        File[] files = fdBase.listFiles(); // without filter
         Arrays.sort(files, Collections.reverseOrder());
         for (File f : files) {
             if (f.isDirectory()) {

@@ -1,7 +1,6 @@
 <component name="libraryTable">
   <library name="misc">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../OPIOctopus900/libs/commons-io-1.3.2.jar!/" />
       <root url="jar://$PROJECT_DIR$/../OPIOctopus900/libs/commons-io-2.4.jar!/" />
       <root url="jar://$PROJECT_DIR$/../OPIOctopus900/libs/commons-lang3-3.3.2.jar!/" />
       <root url="jar://$PROJECT_DIR$/../OPIOctopus900/libs/commons-math3-3.3.jar!/" />
@@ -20,8 +19,6 @@
     </JAVADOC>
     <SOURCES>
       <root url="jar://$PROJECT_DIR$/../OPIOctopus900/libs/commons-io-2.4-sources.jar!/" />
-      <root url="jar://$PROJECT_DIR$/../OPIOctopus900/libs/jgoodies-looks-2.6.0-sources.jar!/" />
-      <root url="jar://$PROJECT_DIR$/../OPIOctopus900/libs/jgoodies-looks-2.6.0-tests.jar!/" />
       <root url="jar://$PROJECT_DIR$/../OPIOctopus900/libs/opencv-249.jar!/" />
       <root url="jar://$PROJECT_DIR$/../OPIOctopus900/libs/sqlite-jdbc-3.8.7.jar!/" />
     </SOURCES>
