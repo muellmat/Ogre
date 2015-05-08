@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="OPI">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../OPIOctopus900/build/libs/opi-7.0.1.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

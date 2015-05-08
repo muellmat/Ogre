@@ -1,0 +1,12 @@
+*.swp
+*.class
+Thumbs.db
+.DS_Store
+.classpath
+.project
+out/
+build/
+#.idea/workspace.xml
+#.idea/gradle.xml
+#.idea/misc.xml
+#.idea/vcs.xml
