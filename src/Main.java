@@ -114,6 +114,31 @@ public class Main {
                 setting.addDefaultLevels();
                 setting.addDefaultLocations();
                 break;
+            case 3:
+                int[] locations3_left = {
+                        +5,+5,
+                        -3,-6
+                };
+                int[] locations3_right = {
+                        -5,+5,
+                        +3,-6
+                };
+                int[] levels3                  = {3,6,9,12,15,18,21,24,27,30,33,36,39};
+                setting.catchTrials            =  0.40;
+                setting.presentations          =    10;
+                setting.stimulusSize           =     3;
+                setting.stimulusDuration       =   200;
+                setting.stimulusResponseWindow =  1500;
+                setting.background             =    10;
+                setting.audioSignalLowCT       =  true;
+                setting.levels.clear();
+                setting.locations.clear();
+                setting.default_levels = levels3;
+                if (eye.equals("left"))  setting.default_locations = locations3_left;
+                if (eye.equals("right")) setting.default_locations = locations3_right;
+                setting.addDefaultLevels();
+                setting.addDefaultLocations();
+                break;
         }
         MoCS mocs = setting.toMoCS();
 
