@@ -1,1 +1,1 @@
-Ogre is a small perimetry demo application for/using OPI and OPIOctopus900.
+Ogre is a small perimetry demo application for [OPI](https://github.com/turpinandrew/OPI) and [OPIOctopus900](https://github.com/turpinandrew/OPIOctopus900) (private repository) using the [Octopus® 900](http://www.haag-streit.com/products/perimetry/octopusr-900.html) perimeter ([Haag-Streit](http://www.haag-streit.com/)).
