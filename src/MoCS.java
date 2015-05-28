@@ -9,10 +9,11 @@ public class MoCS {
     private Vector<StimulusLevel>    levels;
 
     private int presentations  = 0;
-    private double catchTrials = 0.05;
+    private double catchTrials = 0.40;
 
     private int totalStimuli     = 0;
     private int totalCatchTrials = 0;
+    private int nqa              = 0;
 
     private int stimulusSize           =    3;
     private int stimulusDuration       =  200;
@@ -53,8 +54,12 @@ public class MoCS {
     }
 
     public void generate() {
-        totalStimuli     = presentations * locations.size() * levels.size();
-        totalCatchTrials = 2 * (int)Math.ceil(totalStimuli*catchTrials);
+        //totalStimuli     = presentations * locations.size() * levels.size();
+        //totalCatchTrials = 2 * (int)Math.ceil(totalStimuli*catchTrials);
+
+        totalStimuli = presentations * locations.size() * levels.size();
+        nqa = (int) (totalStimuli/(1.0-2*catchTrials));
+        totalCatchTrials = 2 * (int)Math.ceil(nqa*catchTrials);
 
         stimuli = new Vector<Stimulus>();
 
@@ -112,8 +117,8 @@ public class MoCS {
         return totalCatchTrials;
     }
 
-    public int numberTotal() {
-        return totalStimuli+totalCatchTrials;
+    public int numberQuestionsAsked() {
+        return nqa;
     }
 
     public Vector<Stimulus> getStimuli() {

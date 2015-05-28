@@ -123,9 +123,9 @@ public class Main {
                         -5,+5,
                         +3,-6
                 };
-                int[] levels3                  = {3,6,9,12,15,18,21,24,27,30,33,36,39};
+                int[] levels3                  = {3};//{3,6,9,12,15,18,21,24,27,30,33,36,39};
                 setting.catchTrials            =  0.40;
-                setting.presentations          =    10;
+                setting.presentations          =    1;
                 setting.stimulusSize           =     3;
                 setting.stimulusDuration       =   200;
                 setting.stimulusResponseWindow =  1500;
@@ -168,15 +168,23 @@ public class Main {
         // start gaze tracker capture
         opi.getGazeTracker().startRawFrameCapture(pathExamination,String.format("%03d.csv",examinationID));
 
+        System.out.printf("\n");
+        System.out.printf("-------------------------\n");
+        System.out.printf("NQA    %4d\n", mocs.numberQuestionsAsked());
+        System.out.printf("#Stim  %4d\n",mocs.numberOfStimuli());
+        System.out.printf("#CT    %4d\n",mocs.numberOfCatchTrials());
+        System.out.printf("-------------------------\n");
+        System.out.printf("\n");
+
         // examination
         Stimulus stim1 = null;
         Stimulus stim2 = null;
         OpiPresentReturn ret  = null;
         OpiStaticStimulus stim = null;
         OpiStaticStimulus next = null;
-        for (int i=0; i<mocs.numberTotal(); i++) {
+        for (int i=0; i<mocs.numberQuestionsAsked(); i++) {
             stim1 = mocs.getStimuli().get(mod(i+0,mocs.numberOfStimuli()));
-            stim2 = mocs.getStimuli().get(mod(i+1,mocs.numberOfStimuli()));
+            stim2 = mocs.getStimuli().get(mod(i + 1, mocs.numberOfStimuli()));
             stim  = stim1.getStimulus();
             next  = stim2.getStimulus();
 
@@ -190,7 +198,8 @@ public class Main {
 
             ret = opi.opiPresent(stim,next);
 
-            System.out.printf("%04d stim 1: %s\n%04d stim 2: %s\n\n",i,stim,i,next);
+            //System.out.printf("%04d stim 1: %s\n%04d stim 2: %s\n\n",i,stim,i,next);
+            System.out.printf(">>> %4d/%4d    %s\n",i+1,mocs.numberQuestionsAsked(),stim);
         }
 
         // stop gaze tracker capture
