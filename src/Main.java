@@ -9,6 +9,7 @@ import sun.misc.SignalHandler;
 import javax.sound.sampled.LineUnavailableException;
 import java.io.File;
 import java.io.FileFilter;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -22,6 +23,9 @@ public class Main {
 
     public File fdBase;
     public File fdExamination;
+    public File fdResult;
+
+    public FileWriter fwResult;
 
     public int examinationID = 0;
 
@@ -56,6 +60,11 @@ public class Main {
         fdExamination = new File(pathExamination);
         if (!fdExamination.exists())
             fdExamination.mkdirs();
+
+        fdResult = new File(String.format("%s\\result.csv",pathExamination));
+        if (!fdExamination.exists())
+            fdResult.createNewFile();
+        fwResult = new FileWriter(fdResult,true);
 
         // settings and mocs
         Settings setting = new Settings();
@@ -123,9 +132,9 @@ public class Main {
                         -5,+5,
                         +3,-6
                 };
-                int[] levels3                  = {3};//{3,6,9,12,15,18,21,24,27,30,33,36,39};
+                int[] levels3                  = {3,6,9,12,15,18,21,24,27,30,33,36,39};
                 setting.catchTrials            =  0.40;
-                setting.presentations          =    1;
+                setting.presentations          =    10;
                 setting.stimulusSize           =     3;
                 setting.stimulusDuration       =   200;
                 setting.stimulusResponseWindow =  1500;
@@ -183,7 +192,7 @@ public class Main {
         OpiStaticStimulus stim = null;
         OpiStaticStimulus next = null;
         for (int i=0; i<mocs.numberQuestionsAsked(); i++) {
-            stim1 = mocs.getStimuli().get(mod(i+0,mocs.numberOfStimuli()));
+            stim1 = mocs.getStimuli().get(mod(i + 0, mocs.numberOfStimuli()));
             stim2 = mocs.getStimuli().get(mod(i + 1, mocs.numberOfStimuli()));
             stim  = stim1.getStimulus();
             next  = stim2.getStimulus();
@@ -197,13 +206,23 @@ public class Main {
             }
 
             ret = opi.opiPresent(stim,next);
+            fwResult.write(String.format("%d;%d;%d;%d;%d;%d;%d\n",
+                    System.currentTimeMillis(),
+                    (int)stim.getX(),
+                    (int)stim.getY(),
+                    (int)stim.getDuration(),
+                    (int)stim.getResponseWindow(),
+                    (int)stim.getLevel(),
+                    (int)stim.getSize()
+            ));
 
             //System.out.printf("%04d stim 1: %s\n%04d stim 2: %s\n\n",i,stim,i,next);
-            System.out.printf(">>> %4d/%4d    %s\n",i+1,mocs.numberQuestionsAsked(),stim);
+            System.out.printf(">>> %4d/%4d    %s\n", i + 1, mocs.numberQuestionsAsked(),stim);
         }
 
         // stop gaze tracker capture
         opi.getGazeTracker().stopRawFrameCapture();
+        fwResult.close();
         System.exit(0);
 
         /*
